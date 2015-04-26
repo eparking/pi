@@ -6,6 +6,7 @@ import math
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+<<<<<<< HEAD
 GPIO.setup(3, GPIO.OUT) #pin3 = Green LED
 GPIO.setup(4, GPIO.OUT) #pin4 = Red LED
 GPIO.setup(17, GPIO.OUT) #pin17 = Blue LED
@@ -54,6 +55,28 @@ while True: #This will pull from the server forever!
 			x = True
 		#else:
 		#	print("error on " + data_arr["vacant"])
+=======
+
+GPIO.setup(4, GPIO.OUT) #pin4 = Green LED
+GPIO.setup(17, GPIO.OUT) #pin17 = Red LED
+
+while 1==1: #This will pull from the server forever!
+	r = requests.get('https://fathomless-wave-8947.herokuapp.com/read/0')
+	#print(r.url)
+
+	data = r.text
+
+	data_arr = json.loads(data)
+
+	print(data)
+	print(data_arr)
+	
+	if data_arr["vacant"] == True:
+		print("True!")
+		time.sleep(2)
+		GPIO.output(4, 1)
+		GPIO.output(17, 0)
+>>>>>>> origin/master
 	else:
 		GPIO.output(3, 0) # green light is off
 		GPIO.output(4, 0) # red light is off
