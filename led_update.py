@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import math
 import urllib3
+import os
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -20,7 +21,7 @@ temp = 0
 #it's to make sure the user is not allowed to go overboard!
 
 while True: #This will pull from the server forever!
-	# if total_time < end:
+	#if total_time < end:
 		urllib3.disable_warnings()
 		r = requests.get('http://eparking196.herokuapp.com/read/1')
 		if r.status_code == 200: # this checks for internet connection
@@ -70,11 +71,6 @@ while True: #This will pull from the server forever!
 			GPIO.output(27, 0) # green light is off
 			GPIO.output(4, 0) # red light is off
 			GPIO.output(17,1) # blue light is on
-	# else: #the time is up, need to set a way to reset this!
-	# 	temp += 1
-	# 	print(temp)
-	# 	if temp > 10000: #turns the red light on to indicate time is up
-	# 		GPIO.output(27,0)
-	# 		GPIO.output(4,1)
-	# 		GPIO.output(17,0)
+	#else:
+	#	os.system('w3m https://eparking196.herokuapp.com/drop_spot/1')
 #GPIO.cleanup()
